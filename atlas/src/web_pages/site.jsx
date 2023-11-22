@@ -2,6 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { database } from '../firebase';
 import { getDatabase, ref, get, set, push, child, query, orderByChild, equalTo, remove } from 'firebase/database';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Fab from '@mui/material/Fab';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
 
 
 function Site() {
@@ -95,6 +100,7 @@ function Site() {
 
 const handleUserCityChange = (event) => {
   setUserCity(event.target.value);
+  
 };
 
 
@@ -142,6 +148,8 @@ const findSimilarCities = () => {
         if (similarity >= 0.2) { // Adjust the threshold as needed
           results[city] = messages[city];
           //console.log(results[city])
+          setUserCity('');
+
           
         }
       
@@ -152,54 +160,34 @@ const findSimilarCities = () => {
 };
   
     return (
-      // // <div>
-      //   {/* <h1>Messages</h1> */}
-      //   {/* {messages.map((object, index) => (
-      //   <div key={index}>
-      //     <h2>Object {index}</h2>
-      //     <ul>
-      //       {Object.entries(object).map(([key, value]) => (
-      //         <li key={key}>
-      //           <strong>{key}:</strong> {value}
-      //         </li>
-      //       ))}
-      //     </ul>
-      //   </div>
-      // ))} */}
-      // {/* {Object.entries(messages).map(([city, places]) => (
-      //   <div key={city}>
-      //     <h2>{city}</h2>
-      //     <ul>
-      //       {Object.entries(places).map(([place, category]) => (
-      //         <li key={place}>
-      //           <strong>{place}</strong>: {category}
-      //         </li>
-      //       ))}
-      //     </ul>
-      //   </div>
-      // ))}
-   
     
-      // </div> */}
       <div>
-      <h1>Pleasing Sites!!</h1>
       
-      <button onClick={() => addNewPlace('Airport', 'NewPlace', 'NewCategory')}>
+      
+      <Button variant="outlined" color="secondary" onClick={() => addNewPlace('Airport', 'NewPlace', 'NewCategory')} sx={{ mx: 1 }}>
                 Add New Sites
-            </button>
-            <button onClick={() => deletePlace('Airport', 'NewPlace')}>Delete</button>  
+            </Button>
+            <Button variant="outlined" color="secondary" onClick={() => deletePlace('Airport', 'NewPlace')}>Delete</Button>  
 
 <div>
-  <label htmlFor="userCityInput">Enter the sites:</label>
+  {/* <label htmlFor="userCityInput">Enter the sites:</label>
   <input
     type="text"
     id="userCityInput"
     value={userCity}
     onChange={handleUserCityChange}
-  />
-  <button onClick={findSimilarCities}>Find Similar Sites</button>
+  /> */}
+  <TextField id="userCityInput"
+          value={userCity}
+          onChange={handleUserCityChange} label="Enter Site" variant="outlined" color='secondary' margin="normal" />
+        
+        <Fab color="secondary" aria-label="edit" onClick={findSimilarCities} size="medium" margin="normal" sx={{ my: 2, mx: 1 }}>
+        <SearchIcon/>
+      </Fab>
+  {/* <button onClick={findSimilarCities}>Find Similar Sites</button> */}
   
 </div> 
+<h1>Pleasing Sites!!</h1>
 
 <ul>
 {/* {Object.entries(similarityResults).map(([city, similarity]) => (
@@ -208,7 +196,8 @@ const findSimilarCities = () => {
     </li>
   ))} */}
 
-{similarityResults ? (
+<Stack direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }}>{similarityResults ? (
   Object.entries(similarityResults).map(([city, places]) => (
     <div key={city}>
       <h2>{city}</h2>
@@ -224,7 +213,7 @@ const findSimilarCities = () => {
 ) : (
   // Display a message when there are no messages
   <p>No messages available.</p>
-)}  
+)}  </Stack>
 </ul>      
     </div>
     );

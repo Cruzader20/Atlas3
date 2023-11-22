@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get } from 'firebase/database';
+import { getAuth } from "firebase/auth";
 
 //import firebase from 'firebase/app';
 import 'firebase/database';
@@ -21,11 +22,13 @@ const firebaseConfig = {
   measurementId: "G-92M9GYR0TH"
 };
 
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Get a reference to the database
 const database = getDatabase(app);
-
+export const auth = getAuth(app);
 export { database };
 //const analytics = getAnalytics(app);

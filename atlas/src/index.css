@@ -1,13 +1,69 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.logo{
+  width:20%;
+  height: 20%;
+}
+
+.top{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.venue {
+  display: flex;
+}
+.venueChild {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust alignment as needed */
+}
+
+.venueChild > div {
+  width: calc(33.33% - 20px); /* Adjust width and margin as needed */
+  margin-bottom: 5%;
+}
+
+.venue ul {
+  list-style: none;
+  /* border: 5px solid black; */
+  border-radius: 5px;
+  overflow: hidden;
+  padding-left: 0px;
+}
+
+.venue li img {
+  width: 423px; /* Ensures the image takes the full width of its container */
+  height: 400px; /* Allows the image to maintain its aspect ratio */
+  object-fit: cover; /* Ensures the image covers its entire container */
+  border-radius: 5px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.venue li img:hover {
+  transform: scale(1.1);
+  
+}
+ul{
+  list-style: none;
+}
+
+.admin{
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  align-items: center;
+  justify-content: center;
 }
