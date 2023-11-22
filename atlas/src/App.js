@@ -31,7 +31,7 @@ function App() {
         // Signed in
         const user = userCredential.user;
         // navigate("/main");
-        userCredential.user === "admin@admin.com" ? navigate("/admin") : navigate("/main");
+        email === "admin@admin.com" ? navigate("/admin") : navigate("/main");
         console.log(user);
         setIsloggedIn(true);
         
