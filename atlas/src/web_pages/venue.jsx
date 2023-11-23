@@ -57,57 +57,57 @@ function Venue() {
     fetchData();
   }, []);
 
-  const addNewPlace = async (city, place, category) => {
-    // Check if the city exists in the database
-    //const cityRef = ref(database, '/Place'); // Assuming 'city' is the city name, e.g., 'Agra'
+  // const addNewPlace = async (city, place, category) => {
+  //   // Check if the city exists in the database
+  //   //const cityRef = ref(database, '/Place'); // Assuming 'city' is the city name, e.g., 'Agra'
 
-    //const citySnapshot = await get(cityRef);
-    //const entryExistsQuery = query(ref(database, `/Place/${city}`), orderByChild('place'), equalTo(place));
-    const cityRef = ref(database, `/Place/${city}`);
-    const placeSnapshot = await get(child(cityRef, place));
+  //   //const citySnapshot = await get(cityRef);
+  //   //const entryExistsQuery = query(ref(database, `/Place/${city}`), orderByChild('place'), equalTo(place));
+  //   const cityRef = ref(database, `/Place/${city}`);
+  //   const placeSnapshot = await get(child(cityRef, place));
 
-    //const entrySnapshot = await get(entryExistsQuery);
+  //   //const entrySnapshot = await get(entryExistsQuery);
 
-    // if (citySnapshot.exists()) {
-    //     // The city exists, so add a new place with its category
-    //     const newPlaceData = {
-    //         [place]: category
-    //     };
-    if (messages && messages[city] && !placeSnapshot.exists()) {
-      // The city exists, so add a new place with its category
-      const newPlaceData = {
-        [place]: category,
-      };
+  //   // if (citySnapshot.exists()) {
+  //   //     // The city exists, so add a new place with its category
+  //   //     const newPlaceData = {
+  //   //         [place]: category
+  //   //     };
+  //   if (messages && messages[city] && !placeSnapshot.exists()) {
+  //     // The city exists, so add a new place with its category
+  //     const newPlaceData = {
+  //       [place]: category,
+  //     };
 
-      try {
-        // Push the new place data into the city node
-        //const newPlaceRef = push(ref(database, `/Place/${city}/${place}`));
-        await set(ref(database, `/Venue/${city}/${place}`), category);
-        console.log("New place added successfully");
-      } catch (error) {
-        console.error("Error adding new place:", error);
-      }
-    } else {
-      console.log("City does not exist. You can handle this case accordingly.");
-    }
-  };
+  //     try {
+  //       // Push the new place data into the city node
+  //       //const newPlaceRef = push(ref(database, `/Place/${city}/${place}`));
+  //       await set(ref(database, `/Venue/${city}/${place}`), category);
+  //       console.log("New place added successfully");
+  //     } catch (error) {
+  //       console.error("Error adding new place:", error);
+  //     }
+  //   } else {
+  //     console.log("City does not exist. You can handle this case accordingly.");
+  //   }
+  // };
 
-  const deletePlace = async (city, place) => {
-    if (messages && messages[city] && messages[city][place]) {
-      const cityRef = ref(database, `/Venue/${city}`);
-      try {
-        // Remove the place from the city node
-        await remove(child(cityRef, place));
-        console.log("Place deleted successfully");
-      } catch (error) {
-        console.error("Error deleting place:", error);
-      }
-    } else {
-      console.log(
-        "City or place does not exist. You can handle this case accordingly."
-      );
-    }
-  };
+  // const deletePlace = async (city, place) => {
+  //   if (messages && messages[city] && messages[city][place]) {
+  //     const cityRef = ref(database, `/Venue/${city}`);
+  //     try {
+  //       // Remove the place from the city node
+  //       await remove(child(cityRef, place));
+  //       console.log("Place deleted successfully");
+  //     } catch (error) {
+  //       console.error("Error deleting place:", error);
+  //     }
+  //   } else {
+  //     console.log(
+  //       "City or place does not exist. You can handle this case accordingly."
+  //     );
+  //   }
+  // };
 
   const handleUserCityChange = (event) => {
     setUserCity(event.target.value);
@@ -198,16 +198,16 @@ function Venue() {
     <div>
       
 
-      <Button variant="outlined" color="secondary" onClick={() => addNewPlace("NewCity", "NewPlace", "NewCategory")} sx={{ mx: 1 }}>
+      {/* <Button variant="outlined" color="secondary" onClick={() => addNewPlace("NewCity", "NewPlace", "NewCategory")} sx={{ mx: 1 }}>
         Add New Venue
       </Button>
 
-      <Button variant="outlined" color="secondary" onClick={() => deletePlace("Airport", "NewPlace")}>Delete</Button>
+      <Button variant="outlined" color="secondary" onClick={() => deletePlace("Airport", "NewPlace")}>Delete</Button> */}
 
       <div>
       <TextField id="userCityInput"
           value={userCity}
-          onChange={handleUserCityChange} label="Enter City" variant="outlined" color='secondary' margin="normal" />
+          onChange={handleUserCityChange} label="Enter Venue" variant="outlined" color='secondary' margin="normal" />
         
         <Fab color="secondary" aria-label="edit" onClick={findSimilarCities} size="medium" sx={{ my: 2, mx: 1 }}>
         <SearchIcon/>

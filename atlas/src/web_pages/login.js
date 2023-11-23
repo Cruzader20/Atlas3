@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import { Button } from "@mui/material";
+import { TextField } from "@mui/material";
 
 
 const Login = () => {
@@ -17,9 +18,8 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigate("/main");
+        email === "admin@admin.com" ? navigate("/admin") : navigate("/main");
         console.log(user);
-        
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -29,50 +29,59 @@ const Login = () => {
       });
   };
 
+  
+
   return (
     <>
-      
       <main>
-        <section>
-          <div>
-            <h1> Login </h1>
-            <form>
+            <section>
               <div>
-                <label htmlFor="email-address">Email address</label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+                <h1> Login </h1>
+                <form>
+                  <div>
+                    <TextField
+                      id="email-address"
+                      label="Email address"
+                      variant="outlined"
+                      name="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      sx={{ m: 0.5 }}
+                    />
+                  </div>
 
-              <div>
-                <label htmlFor="password">Password</label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+                  <div>
+                    <TextField
+                      id="password"
+                      label="Password"
+                      type="password"
+                      variant="outlined"
+                      name="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      sx={{ m: 0.5 }}
+                    />
+                  </div>
 
-              <div>
-                <button onClick={onLogin}>Login</button>
-              </div>
-            </form>
+                  <div>
+                    <Button
+                      variant="contained"
+                      onClick={onLogin}
+                      color="secondary"
+                      sx={{ m: 0.5 }}
+                    >
+                      Login
+                    </Button>
+                  </div>
+                </form>
 
-            <p className="text-sm text-white text-center">
-              No account yet? <NavLink to="/signup">Sign up</NavLink>
-            </p>
-          </div>
-        </section>
-      </main>
-    </>
+                <p className="text-sm text-white text-center">
+                  No account yet? <NavLink to="/signup">Sign up</NavLink>
+                </p>
+              </div>
+            </section>
+          </main>
+        </>
+      
+    
   );
 };
 

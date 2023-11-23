@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-
+import React, { useState,useEffect} from "react";
+import { auth } from "../firebase";
 import Home from "./home";
 import Site from "./site";
 import Venue from "./venue";
@@ -10,23 +10,67 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Map from "../map.png";
+import { Button } from "@mui/material";
+import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 function Main() {
   const [selectedPage, setSelectedPage] = useState("home");
-
-  // Function to handle radio button changes
-  // const handlePageChange = (event) => {
-  //   setSelectedPage(event.target.value);
-  // };
+  const navigate = useNavigate();
+ 
 
   const handlePageChange = (value) => {
     setSelectedPage(value);
   };
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        // ...
+        console.log("uid", uid);
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+        
+      }
+    });
+  }, []);
   
   return (
     <div>
-     
+     <div>
+          <>
+        
+            <nav>
+              <div>
+                <Button
+                  color="secondary"
+                  variant="outlined"
+                  onClick={handleLogout}
+                  sx={{ m: 2 }}
+                >
+                  Logout
+                </Button>
+              </div>
+            </nav>
+          </>{" "}
+        </div>
       <div className="top">
         <Box
           alignItems="center"
